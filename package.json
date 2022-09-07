@@ -1,0 +1,34 @@
+{
+  "name": "booky-qa-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^29.0.0",
+    "jest": "^28.1.3",
+    "jest-playwright-preset": "^2.0.0",
+    "playwright": "^1.25.1",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.8.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testTimeout": 120000
+  }
+}
