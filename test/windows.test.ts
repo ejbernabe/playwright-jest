@@ -43,16 +43,21 @@ describe('handling alerts', () => {
         ])
 
         await multipage.waitForLoadState();
-        const pages = multipage.context().pages();
+        const allWindows = multipage.context().pages();
 
-        console.log("length: " + pages.length);
+        console.log("length: " + allWindows.length);
 
-        pages.forEach(page => {
+        allWindows.forEach(page => {
             console.log(page.url());
         })
 
-        
+        await allWindows[1].bringToFront();
+        allWindows[1].on("dialog", (dialog) => {
+            // console.log("Message: " + dialog.message());
+            dialog.accept();
+        })
 
+        allWindows[1].click("#accept");
     });
 
     // afterAll(async () => {
