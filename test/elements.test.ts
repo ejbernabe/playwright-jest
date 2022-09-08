@@ -31,6 +31,19 @@ describe('handling alerts', () => {
         const repos = await page.$$("app-gitrepos ol li");
     
         console.log("no of repos: " + repos.length);
+
+        // for await
+        for await (const repo of repos) {
+            console.log("text: " + await repo.innerText());
+        }
+
+        // map to 1 array
+        const allUrls = await Promise.all(repos.map(async (repo, i) => {
+            return await repo.innerText()
+        }));
+
+        console.log("allUrls: " + allUrls);
+        console.log("allUrls index 0: " + allUrls[0]);
     });
 
    
