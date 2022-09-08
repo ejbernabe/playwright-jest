@@ -20,6 +20,10 @@ describe('handling alerts', () => {
     })
 
     test('Enter Git username', async () => {
+
+        const header = await page.$("nav[role='navigation']");
+        header?.screenshot({ path: "images/header.png" })
+
         const username = await page.$("input[name='username']");
 
         await username?.fill("ejbernabe");
@@ -44,11 +48,23 @@ describe('handling alerts', () => {
 
         console.log("allUrls: " + allUrls);
         console.log("allUrls index 0: " + allUrls[0]);
+
+        await page.screenshot({
+            path: "images/full.png",
+            fullPage: true
+        })
     });
+
+    afterEach( async () => {
+        await page.screenshot({
+            path: "images/" + Date.now() + "_screenshot1.png"
+            // path: "../images/screenshot1.png"
+        })
+    })
 
    
     afterAll(async () => {
-        await page.pause();
+        // await page.pause();
         await page.close();
         await context.close();
         await browser.close();
