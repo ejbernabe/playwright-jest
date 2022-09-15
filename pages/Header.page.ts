@@ -11,7 +11,7 @@ export default class HeaderPage {
     // locators
 
     public get loginButton() {
-        const ele = this.page.$("text='Log ins'")
+        const ele = this.page.$("text='Log in'")
         
         if (ele != null) {
             return ele;
