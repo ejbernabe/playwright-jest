@@ -38,7 +38,7 @@ describe('POM testing', () => {
         await page.waitForURL(Env.test, {
             waitUntil: "load"
         })
-        
+
         // pages
         header = new HeaderPage(page);
         login = new LoginPage(page);
@@ -46,9 +46,8 @@ describe('POM testing', () => {
     })
 
     test('Login positive', async () => {
-        console.log("before expect: " + page.url());
         expect(page.url()).toBe("https://letcode.in/");
-        console.log("after expect: " + page.url());
+
         await header.clickLogin();
 
         expect(page.url()).toBe("https://letcode.in/signin");
@@ -59,8 +58,10 @@ describe('POM testing', () => {
 
         const toaster = await common.toaster;
         expect( await toaster?.textContent()).toContain("Welcome");
+        await common.closeToaster();
 
         await header.clickSignout();
+        await page.pause();
 
     });
     

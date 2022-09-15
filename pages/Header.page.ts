@@ -21,7 +21,9 @@ export default class HeaderPage {
     }
 
     public get signoutButton() {
-        const ele = this.page.$("text='Sign Out'")
+        const ele = this.page.$("//div[@class='navbar-item']")
+
+        this.page.waitForSelector("//div[@class='navbar-item']")
 
         if (ele != null) {
             return ele;

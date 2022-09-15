@@ -15,4 +15,13 @@ export default class Common {
     public async verifyToast() {
         
     }
+
+    public get closeButton() {
+        return this.page.$("//button[@aria-label='Close']");
+    }
+
+    public async closeToaster() { 
+        const ele = await this.closeButton;
+        await ele?.click();
+    }
 }
