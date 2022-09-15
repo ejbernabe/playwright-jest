@@ -4,6 +4,8 @@ import HeaderPage from "../pages/Header.page";
 import LoginPage from "../pages/Login.page";
 import Env from "../utils/environment";
 
+
+
 describe('POM testing', () => {
 
     let browser: Browser;
@@ -21,13 +23,22 @@ describe('POM testing', () => {
 
         context = await browser.newContext();
         page = await context.newPage();
-        page.setDefaultTimeout(30000)
         
-        await page.goto(Env.test, {
-            timeout: 30000, 
+        // page.goto(Env.test);
+
+        page.goto(Env.test, {
+            timeout: 100000, 
             waitUntil: "load"
         });
 
+        // page.setDefaultTimeout(1000000)
+
+        // page.waitForNavigation()
+        // page.waitForLoadState("domcontentloaded")
+        await page.waitForURL(Env.test, {
+            waitUntil: "load"
+        })
+        
         // pages
         header = new HeaderPage(page);
         login = new LoginPage(page);
@@ -35,8 +46,9 @@ describe('POM testing', () => {
     })
 
     test('Login positive', async () => {
+        console.log("before expect: " + page.url());
         expect(page.url()).toBe("https://letcode.in/");
-
+        console.log("after expect: " + page.url());
         await header.clickLogin();
 
         expect(page.url()).toBe("https://letcode.in/signin");
@@ -53,9 +65,9 @@ describe('POM testing', () => {
     });
     
     afterAll(async () => {
-        await page.pause();
-        // await page.close();
-        // await context.close();
-        // await browser.close();
+        // await page.pause();
+        await page.close();
+        await context.close();
+        await browser.close();
     })
 })
