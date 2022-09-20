@@ -3,33 +3,22 @@ import Common from "../pages/common.page";
 import HeaderPage from "../pages/Header.page";
 import LoginPage from "../pages/Login.page";
 import Env from "../utils/environment";
+import * as data from "../data/login.cred.json";
 
-
+declare const page: Page;
 
 describe('POM testing', () => {
-
-    let browser: Browser;
-    let context: BrowserContext;
-    let page: Page;
 
     let header: HeaderPage;
     let login: LoginPage;
     let common: Common;
 
     beforeAll(async() => {
-        browser = await chromium.launch({
-            headless: false
-        });
-
-        context = await browser.newContext();
-        page = await context.newPage();
         
+        // page.setDefaultTimeout(1000000)
         // page.goto(Env.test);
 
-        page.goto(Env.test, {
-            timeout: 100000, 
-            waitUntil: "load"
-        });
+        await page.goto(Env.test);
 
         // page.setDefaultTimeout(1000000)
 
@@ -52,11 +41,13 @@ describe('POM testing', () => {
 
         expect(page.url()).toBe("https://letcode.in/signin");
 
-        await login.enterUsername("koushik1@letcode.in");
-        await login.enterPass("Pass123$");
+        await login.enterUsername(data.email);
+        await login.enterPass(data.password);
+        // await login.enterUsername("koushik1@letcode.in");
+        // await login.enterPass("Pass123$");
         await login.clickLogin();
 
-        const toaster = await common.toaster;
+        const toaster = await common.toaster();
         expect( await toaster?.textContent()).toContain("Welcome");
         await common.closeToaster();
 

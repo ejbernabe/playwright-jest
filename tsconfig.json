@@ -3,6 +3,12 @@
         "target": "es6",
         "strict": true,
         "module": "commonjs",
-        "sourceMap": true
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "types": [
+            "@types/jest",
+            "jest-playwright-preset",
+            "expect-playwright",
+        ]
     }
 }

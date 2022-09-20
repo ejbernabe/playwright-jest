@@ -8,9 +8,7 @@ export default class Common {
         this.page = page;
     }
 
-    public get toaster() {
-        return this.page.waitForSelector("div[role='alertdialog']");
-    }
+    toaster = async () => await this.page.waitForSelector("div[role='alertdialog']");
 
     public async verifyToast() {
         
